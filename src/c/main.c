@@ -16,15 +16,16 @@
 #define BG_ORIGIN_Y 0
 #define SPINNER_X 90
 #define SPINNER_Y 59
-#define SPINNER_BASE_INNER_RADIUS 15
-#define SPINNER_BASE_OUTER_RADIUS 33
-#define SPINNER_MINUTE_INNER_RADIUS 17
-#define SPINNER_MINUTE_OUTER_RADIUS 37
-#define SPINNER_HOUR_INNER_RADIUS 15
-#define SPINNER_HOUR_OUTER_RADIUS 33
-#define SPINNER_CENTER_RADIUS 5
-#define SPINNER_MINUTE_WIDTH 3
-#define SPINNER_HOUR_WIDTH 5
+#define SPINNER_BASE_INNER_RADIUS 16
+#define SPINNER_BASE_OUTER_RADIUS 36
+#define SPINNER_MINUTE_INNER_RADIUS 18
+#define SPINNER_MINUTE_OUTER_RADIUS 40
+#define SPINNER_HOUR_INNER_RADIUS 16
+#define SPINNER_HOUR_OUTER_RADIUS 36
+#define SPINNER_CENTER_RADIUS 6
+#define SPINNER_BASE_WIDTH 3
+#define SPINNER_MINUTE_WIDTH 4
+#define SPINNER_HOUR_WIDTH 6
 
 static Window *s_main_window;
 static Layer *s_canvas_layer;
@@ -51,7 +52,7 @@ static void draw_spinner_base(GContext *ctx, GPoint center) {
   for (int i = 0; i < 12; ++i) {
     draw_radial_dash(ctx, center, (i * TRIG_MAX_ANGLE) / 12,
                      SPINNER_BASE_INNER_RADIUS, SPINNER_BASE_OUTER_RADIUS,
-                     2, COLOR_SEG_GHOST);
+                     SPINNER_BASE_WIDTH, COLOR_SEG_GHOST);
   }
 }
 
