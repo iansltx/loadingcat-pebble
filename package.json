@@ -19,7 +19,13 @@
       "watchface": true
     },
     "resources": {
-      "media": []
+      "media": [
+        {
+          "type": "png",
+          "name": "IMAGE_BG",
+          "file": "images/loadingcat_bg.png"
+        }
+      ]
     }
   }
 }
