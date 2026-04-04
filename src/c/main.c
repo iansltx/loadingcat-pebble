@@ -14,8 +14,15 @@
 
 #define BG_ORIGIN_X 0
 #define BG_ORIGIN_Y 0
-#define SPINNER_X 94
-#define SPINNER_Y 59
+#define SPINNER_X 88
+#define SPINNER_Y 58
+#define SPINNER_BASE_INNER_RADIUS 15
+#define SPINNER_BASE_OUTER_RADIUS 33
+#define SPINNER_MINUTE_INNER_RADIUS 17
+#define SPINNER_MINUTE_OUTER_RADIUS 37
+#define SPINNER_HOUR_INNER_RADIUS 9
+#define SPINNER_HOUR_OUTER_RADIUS 23
+#define SPINNER_CENTER_RADIUS 5
 
 static Window *s_main_window;
 static Layer *s_canvas_layer;
@@ -49,12 +56,10 @@ static GColor spinner_color_for_step(int step) {
 }
 
 static void draw_spinner_base(GContext *ctx, GPoint center) {
-  const int16_t inner_radius = 10;
-  const int16_t outer_radius = 25;
-
   for (int i = 0; i < 12; ++i) {
     draw_radial_dash(ctx, center, (i * TRIG_MAX_ANGLE) / 12,
-                     inner_radius, outer_radius, 2, COLOR_SEG_GHOST);
+                     SPINNER_BASE_INNER_RADIUS, SPINNER_BASE_OUTER_RADIUS,
+                     2, COLOR_SEG_GHOST);
   }
 }
 
@@ -67,16 +72,18 @@ static void draw_spinner_time(GContext *ctx, GPoint center, const struct tm *tic
 
   for (int i = 5; i >= 0; --i) {
     draw_radial_dash(ctx, center, minute_angle - (i * minute_step),
-                     12, 28, 2, spinner_color_for_step(i));
+                     SPINNER_MINUTE_INNER_RADIUS, SPINNER_MINUTE_OUTER_RADIUS,
+                     2, spinner_color_for_step(i));
   }
 
   for (int i = 3; i >= 0; --i) {
     draw_radial_dash(ctx, center, hour_angle - (i * hour_step),
-                     5, 17, 4, spinner_color_for_step(i));
+                     SPINNER_HOUR_INNER_RADIUS, SPINNER_HOUR_OUTER_RADIUS,
+                     4, spinner_color_for_step(i));
   }
 
   graphics_context_set_fill_color(ctx, COLOR_SEG_CORE);
-  graphics_fill_circle(ctx, center, 5);
+  graphics_fill_circle(ctx, center, SPINNER_CENTER_RADIUS);
 }
 
 static void canvas_update_proc(Layer *layer, GContext *ctx) {
