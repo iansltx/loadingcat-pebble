@@ -1,14 +1,19 @@
 # Loading Cat Pebble Watchface
 
-Pebble Time 2 (`emery`) watchface based on the loading-cat meme.
+Pebble watchface based on the loading-cat meme.
+
+## Platforms
+
+- `emery` - Pebble Time 2, 200x228
+- `flint` - Pebble 2 Duo, 144x168
 
 ## Concept
 
 - Beige background with a close-up black cat face
 - White loading spinner on the forehead
 - Spinner acts as the time display
-- Minute hand: longer, thinner rotating spinner trail
-- Hour hand: shorter, thicker inner spinner trail
+- Emery and flint use different background crops and spinner geometry
+- Spinner uses distinct hour/minute strokes without trailing ghost segments
 
 ## Files
 
@@ -25,4 +30,4 @@ pebble build
 
 ## CloudPebble
 
-Import this repository into CloudPebble, target `emery`, then build and run in the emulator there.
+Import this repository into CloudPebble, choose either `emery` or `flint`, then build and run there.
