@@ -16,20 +16,11 @@ Pebble Time 2 (`emery`) watchface based on the loading-cat meme.
 - `src/pkjs/index.js`: minimal PebbleKit JS entry
 - `package.json`: Pebble app manifest
 - `wscript`: Pebble build config
-- `tools/convert_pebble_bitmap.py`: converts a source image to a Pebble 64-color bitmap asset
 
 ## Build
 
 ```bash
 pebble build
-```
-
-## Regenerate Bitmap Asset
-
-```bash
-python3 tools/convert_pebble_bitmap.py \
-  ../loading_cat_pebble_time2_200x228.png \
-  resources/images/loadingcat_bg.png
 ```
 
 ## CloudPebble
