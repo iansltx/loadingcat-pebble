@@ -1,0 +1,25 @@
+{
+  "name": "loadingcat",
+  "author": "zbw",
+  "version": "1.0.0",
+  "keywords": [
+    "pebble-app"
+  ],
+  "private": true,
+  "dependencies": {},
+  "pebble": {
+    "displayName": "Loading Cat",
+    "uuid": "90f393a9-0595-415e-86a8-fde27b223dde",
+    "sdkVersion": "3",
+    "enableMultiJS": true,
+    "targetPlatforms": [
+      "emery"
+    ],
+    "watchapp": {
+      "watchface": true
+    },
+    "resources": {
+      "media": []
+    }
+  }
+}

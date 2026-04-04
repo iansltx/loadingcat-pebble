@@ -1,0 +1,17 @@
+# Build artifacts
+build/
+.lock-waf_linux_build
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Pebble SDK
+.pebble-sdk/
