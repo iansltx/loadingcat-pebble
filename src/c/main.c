@@ -2,13 +2,13 @@
 
 #ifdef PBL_COLOR
   #define COLOR_SEG_GHOST  GColorDarkGray
-  #define COLOR_SEG_TRAIL  GColorLightGray
-  #define COLOR_SEG_ACTIVE GColorWhite
+  #define COLOR_SEG_MINUTE GColorWhite
+  #define COLOR_SEG_HOUR   GColorChromeYellow
   #define COLOR_SEG_CORE   GColorBlack
 #else
   #define COLOR_SEG_GHOST  GColorWhite
-  #define COLOR_SEG_TRAIL  GColorWhite
-  #define COLOR_SEG_ACTIVE GColorWhite
+  #define COLOR_SEG_MINUTE GColorWhite
+  #define COLOR_SEG_HOUR   GColorWhite
   #define COLOR_SEG_CORE   GColorBlack
 #endif
 
@@ -23,6 +23,8 @@
 #define SPINNER_HOUR_INNER_RADIUS 9
 #define SPINNER_HOUR_OUTER_RADIUS 23
 #define SPINNER_CENTER_RADIUS 5
+#define SPINNER_MINUTE_WIDTH 3
+#define SPINNER_HOUR_WIDTH 5
 
 static Window *s_main_window;
 static Layer *s_canvas_layer;
@@ -45,16 +47,6 @@ static void draw_radial_dash(GContext *ctx, GPoint center, int32_t angle,
                      point_from_polar(center, angle, outer_radius));
 }
 
-static GColor spinner_color_for_step(int step) {
-  if (step == 0) {
-    return COLOR_SEG_ACTIVE;
-  }
-  if (step <= 2) {
-    return COLOR_SEG_TRAIL;
-  }
-  return COLOR_SEG_GHOST;
-}
-
 static void draw_spinner_base(GContext *ctx, GPoint center) {
   for (int i = 0; i < 12; ++i) {
     draw_radial_dash(ctx, center, (i * TRIG_MAX_ANGLE) / 12,
@@ -67,20 +59,13 @@ static void draw_spinner_time(GContext *ctx, GPoint center, const struct tm *tic
   const int32_t minute_angle = (tick_time->tm_min * TRIG_MAX_ANGLE) / 60;
   const int32_t hour_angle =
       (((tick_time->tm_hour % 12) * 60 + tick_time->tm_min) * TRIG_MAX_ANGLE) / (12 * 60);
-  const int32_t minute_step = TRIG_MAX_ANGLE / 60;
-  const int32_t hour_step = TRIG_MAX_ANGLE / 24;
 
-  for (int i = 5; i >= 0; --i) {
-    draw_radial_dash(ctx, center, minute_angle - (i * minute_step),
-                     SPINNER_MINUTE_INNER_RADIUS, SPINNER_MINUTE_OUTER_RADIUS,
-                     2, spinner_color_for_step(i));
-  }
-
-  for (int i = 3; i >= 0; --i) {
-    draw_radial_dash(ctx, center, hour_angle - (i * hour_step),
-                     SPINNER_HOUR_INNER_RADIUS, SPINNER_HOUR_OUTER_RADIUS,
-                     4, spinner_color_for_step(i));
-  }
+  draw_radial_dash(ctx, center, hour_angle,
+                   SPINNER_HOUR_INNER_RADIUS, SPINNER_HOUR_OUTER_RADIUS,
+                   SPINNER_HOUR_WIDTH, COLOR_SEG_HOUR);
+  draw_radial_dash(ctx, center, minute_angle,
+                   SPINNER_MINUTE_INNER_RADIUS, SPINNER_MINUTE_OUTER_RADIUS,
+                   SPINNER_MINUTE_WIDTH, COLOR_SEG_MINUTE);
 
   graphics_context_set_fill_color(ctx, COLOR_SEG_CORE);
   graphics_fill_circle(ctx, center, SPINNER_CENTER_RADIUS);
