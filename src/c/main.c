@@ -1,7 +1,7 @@
 #include <pebble.h>
 
 #ifdef PBL_COLOR
-  #define COLOR_SEG_GHOST  GColorDarkGray
+  #define COLOR_SEG_GHOST  GColorLightGray
   #define COLOR_SEG_MINUTE GColorWhite
   #define COLOR_SEG_HOUR   GColorYellow
   #define COLOR_SEG_CORE   GColorBlack
