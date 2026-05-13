@@ -3,7 +3,7 @@
 #ifdef PBL_COLOR
   #define COLOR_SEG_GHOST  GColorDarkGray
   #define COLOR_SEG_MINUTE GColorWhite
-  #define COLOR_SEG_HOUR   GColorChromeYellow
+  #define COLOR_SEG_HOUR   GColorYellow
   #define COLOR_SEG_CORE   GColorBlack
 #else
   #define COLOR_SEG_GHOST  GColorWhite
